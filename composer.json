@@ -1,6 +1,6 @@
 {
-  "name": "scommerce/base",
-  "description": "Base Module For Magento 2.0",
+  "name": "scommerce/security-base",
+  "description": "SecurityBase Module For Magento 2.0",
   "require": {
     "php": ">=7.2.0",
     "scommerce/core": "2.0.*"
@@ -19,7 +19,7 @@
       "registration.php"
     ],
     "psr-4": {
-      "Scommerce\\Base\\": ""
+      "Scommerce\\SecurityBase\\": ""
     }
   }
 }

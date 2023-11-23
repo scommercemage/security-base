@@ -1,13 +1,13 @@
 <?php
 /**
- * Scommerce base helper class for common functions and retrieving configuration values
+ * Scommerce security_security_base helper class for common functions and retrieving configuration values
  *
  * @category   Scommerce
- * @package    Scommerce_Base
+ * @package    Scommerce_SecurityBase
  * @author     Scommerce Mage <core@scommerce-mage.com>
  */
 
-namespace Scommerce\Base\Helper;
+namespace Scommerce\SecurityBase\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Scommerce\Core\Helper\Data as CoreHelper;
@@ -22,14 +22,14 @@ class Data extends AbstractHelper
      *
      * @var bool
      */
-    const ENABLED = 'base/general/enabled';
+    const ENABLED = 'security_base/general/enabled';
 
     /**
      * variable to get licence key
      *
      * @var string
      */
-    const LICENSE_KEY = 'base/general/license_key';
+    const LICENSE_KEY = 'security_base/general/license_key';
 
     /**
      * @var CoreHelper

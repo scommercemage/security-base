@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Scommerce Base Module configuration file for defining all configurations required for this module
+ * Scommerce SecurityBase Module configuration file for defining all configurations required for this module
  * @category   Scommerce
- * @package    Scommerce_Base
+ * @package    Scommerce_SecurityBase
  * @author     Scommerce Mage <core@scommerce-mage.com>
  */
 -->
@@ -13,17 +13,17 @@
         <tab id="scommerce" translate="label comment" sortOrder="100">
             <label>Scommerce Configuration</label>
         </tab>
-        <section id="base"
+        <section id="security_base"
                  translate="label comment"
                  type="text"
                  sortOrder="10"
                  showInDefault="1"
                  showInWebsite="1"
                  showInStore="1">
-            <label>Base</label>
+            <label>Security Base</label>
             <tab>scommerce</tab>
             <!-- resource tag name which we have to defined in the acl.xml -->
-            <resource>Scommerce_Base::config_base</resource>
+            <resource>Scommerce_SecurityBase::config_security_base</resource>
             <group id="general"
                    translate="label comment"
                    type="text"
