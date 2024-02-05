@@ -14,6 +14,7 @@ use Scommerce\Core\Helper\Data as CoreHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Model\Exception;
 use Magento\Store\Model\ScopeInterface;
+use Magento\Framework\Controller\ResultFactory;
 
 class Data extends AbstractHelper
 {
@@ -36,17 +37,21 @@ class Data extends AbstractHelper
      */
     protected $_coreHelper;
 
+    /** @var ResultFactory */
+    protected $resultFactory;
+
     /**
      * @param Context $context
      * @param CoreHelper $coreHelper
      */
     public function __construct(
         Context $context,
-        CoreHelper $coreHelper
-    )
-    {
-        $this->_coreHelper = $coreHelper;
+        CoreHelper $coreHelper,
+        ResultFactory $resultFactory
+    ) {
         parent::__construct($context);
+        $this->_coreHelper = $coreHelper;
+        $this->resultFactory = $resultFactory;
     }
 
     /**
@@ -58,6 +63,14 @@ class Data extends AbstractHelper
     {
         $enabled = $this->isSetFlag(self::ENABLED,ScopeInterface::SCOPE_STORE, $storeId);
         return $this->isCliMode() ? $enabled : $enabled && $this->isLicenseValid();
+    }
+
+    public function getNoRouteRedirect()
+    {
+        $redirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        $redirectUrl = "scommercesecurity/wronglicense/index";
+        $redirect->setPath($redirectUrl);
+        return $redirect;
     }
 
     /**
