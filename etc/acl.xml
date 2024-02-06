@@ -14,7 +14,7 @@
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
-                            <resource id="Scommerce_SecurityBase::config_base" title="Scommerce SecurityBase Section" sortOrder="10" />
+                            <resource id="Scommerce_SecurityBase::config_security_base" title="Scommerce SecurityBase Section" sortOrder="10" />
                         </resource>
                     </resource>
                 </resource>
