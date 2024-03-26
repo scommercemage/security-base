@@ -48,8 +48,8 @@
                        type="text"
                        sortOrder="20"
                        showInDefault="1"
-                       showInWebsite="1"
-                       showInStore="1">
+                       showInWebsite="0"
+                       showInStore="0">
                     <label>License Key</label>
                     <comment><![CDATA[This setting will be used to verify your license key for the given domain <div style='color:#ff0000;font-size:10px;font-weight:bold'>N.B. License keys are domain specific so for your testing or staging sites please email us at core@scommerce-mage.com</div>]]></comment>
                 </field>

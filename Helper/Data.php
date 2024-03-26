@@ -15,6 +15,7 @@ use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Model\Exception;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Store\Model\StoreManagerInterface;
 
 class Data extends AbstractHelper
 {
@@ -37,21 +38,32 @@ class Data extends AbstractHelper
      */
     protected $_coreHelper;
 
-    /** @var ResultFactory */
+    /** 
+     * @var ResultFactory
+     */
     protected $resultFactory;
+
+    /** 
+     * @var StoreManagerInterface 
+     */
+    protected $_storeManager;
 
     /**
      * @param Context $context
      * @param CoreHelper $coreHelper
+     * @param ResultFactory $resultFactory
+     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         Context $context,
         CoreHelper $coreHelper,
-        ResultFactory $resultFactory
+        ResultFactory $resultFactory,
+        StoreManagerInterface $storeManager
     ) {
         parent::__construct($context);
         $this->_coreHelper = $coreHelper;
         $this->resultFactory = $resultFactory;
+        $this->_storeManager = $storeManager;
     }
 
     /**
@@ -61,7 +73,7 @@ class Data extends AbstractHelper
      */
     public function isEnabled($storeId = null)
     {
-        $enabled = $this->isSetFlag(self::ENABLED,ScopeInterface::SCOPE_STORE, $storeId);
+        $enabled = $this->isSetFlag(self::ENABLED, ScopeInterface::SCOPE_STORE, $storeId);
         return $this->isCliMode() ? $enabled : $enabled && $this->isLicenseValid();
     }
 
@@ -80,7 +92,7 @@ class Data extends AbstractHelper
      */
     public function getLicenseKey($storeId = null)
     {
-        return $this->getValue(self::LICENSE_KEY,ScopeInterface::SCOPE_STORE, $storeId);
+        return $this->getValue(self::LICENSE_KEY, ScopeInterface::SCOPE_STORE, $storeId);
     }
 
     /**
@@ -127,6 +139,15 @@ class Data extends AbstractHelper
     public function isLicenseValid()
     {
         $sku = strtolower(str_replace('\\Helper\\Data', '', str_replace('Scommerce\\', '', get_class())));
-        return $this->_coreHelper->isLicenseValid($this->getLicenseKey(), $sku);
+        return $this->baseIsLicenseValid($this->getLicenseKey(0), $sku);
+    }
+
+    private function baseIsLicenseValid($licenseKey,$sku)
+    {
+        $licenseKey = is_string($licenseKey) ? $licenseKey : '';
+        $url = $this->_storeManager->getDefaultStoreView()->getBaseUrl();
+        $website = $this->_coreHelper->getWebsite($url);
+        $sku = $this->_coreHelper->getSKU($sku);
+        return password_verify($website.'_' . $sku, $licenseKey ?? '');
     }
 }
