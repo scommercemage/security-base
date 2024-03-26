@@ -16,6 +16,7 @@ use Magento\Framework\Model\Exception;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Store\Model\Store;
 
 class Data extends AbstractHelper
 {
@@ -90,9 +91,9 @@ class Data extends AbstractHelper
      * @param int $storeId
      * @return string
      */
-    public function getLicenseKey($storeId = null)
+    public function getLicenseKey()
     {
-        return $this->getValue(self::LICENSE_KEY, ScopeInterface::SCOPE_STORE, $storeId);
+        return $this->getValue(self::LICENSE_KEY, ScopeInterface::SCOPE_STORE, Store::DEFAULT_STORE_ID);
     }
 
     /**
@@ -139,7 +140,7 @@ class Data extends AbstractHelper
     public function isLicenseValid()
     {
         $sku = strtolower(str_replace('\\Helper\\Data', '', str_replace('Scommerce\\', '', get_class())));
-        return $this->baseIsLicenseValid($this->getLicenseKey(0), $sku);
+        return $this->baseIsLicenseValid($this->getLicenseKey(), $sku);
     }
 
     private function baseIsLicenseValid($licenseKey,$sku)
