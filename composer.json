@@ -3,7 +3,7 @@
   "description": "SecurityBase Module For Magento 2.0",
   "require": {
     "php": ">=7.2.0",
-    "scommerce/core": "2.0.*"
+    "scommerce/core": "dev-SCOM-1061"
   },
   "type": "magento2-module",
   "license": "Commercial",
